@@ -19,11 +19,11 @@ class ContasController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Bancos'],
+            'contain' => ['Bancos','Extratos'],
         ];
         $contas = $this->paginate($this->Contas);
-
         $this->set(compact('contas'));
+        
     }
 
     /**
@@ -40,6 +40,7 @@ class ContasController extends AppController
         ]);
 
         $this->set(compact('conta'));
+      
     }
 
     /**

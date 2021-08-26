@@ -23,6 +23,7 @@ $this->assign('breadcrumb',
 //     ]
 //   ])
 // );
+
 ?>
 
 <div class="card card-primary card-outline" style="background-color: #2B4560; color: #E1E7E0;">
@@ -53,13 +54,31 @@ $this->assign('breadcrumb',
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($contas as $conta): ?>
-          <tr>
+        
+
+          <?php $entrada = 0;$saida =0; foreach ($contas as $conta): ?>
+
+           <?php foreach ($conta->extratos as $extratos) :
+                  if($extratos->tipo == 'ENTRADA'){
+                    $entrada += $extratos->valor; 
+                  }else{
+                    $saida += $extratos->valor; 
+                  };
+           endforeach; 
+
+           ?>
+             
+              
+        
             <td><?= $this->Number->format($conta->id_conta) ?></td>
             <td><?= $conta->has('banco') ? $this->Html->link($conta->banco->nome, ['controller' => 'Bancos', 'action' => 'view', $conta->banco->id_banco]) : '' ?></td>
             <td><?= $this->Number->format($conta->agencia) ?></td>
             <td><?= $this->Number->format($conta->nconta) ?></td>
-            <td><?= $this->Number->format($conta->saldo) ?></td>
+             <?php if (!empty($conta->extratos)) { ?>
+              <td><?= $this->Number->format( ($conta->saldo + ($entrada) - ($saida)) ,[
+                'before' => 'R$ ',
+              ])?></td>
+              <?php }; ?>
             <td><?= h($conta->created) ?></td>
             <td><?= h($conta->modified) ?></td>
             <td class="actions">
@@ -68,9 +87,11 @@ $this->assign('breadcrumb',
               <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $conta->id_conta], ['class'=>'btn btn-xs btn-outline-danger', 'escape'=>false, 'confirm' => __('Quer mesmo deletar # {0}?', $conta->id_conta)]) ?>
             </td>
           </tr>
+         
           <?php endforeach; ?>
         </tbody>
     </table>
+    
   </div>
   <!-- /.card-body -->
 
