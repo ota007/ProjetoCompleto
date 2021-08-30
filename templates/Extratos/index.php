@@ -39,24 +39,29 @@ $this->assign('breadcrumb',
     <table class="table text-nowrap">
         <thead>
           <tr>
-              <th><?= $this->Paginator->sort('Id_extrato') ?></th>
+              <!-- <th><?= $this->Paginator->sort('Id_extrato') ?></th> -->
               <th><?= $this->Paginator->sort('Valor') ?></th>
-              <th><?= $this->Paginator->sort('Tipo') ?></th>
+              <!-- <th><?= $this->Paginator->sort('Tipo') ?></th> -->
               <th><?= $this->Paginator->sort('Conta') ?></th>
-              <th><?= $this->Paginator->sort('Criado') ?></th>
-              <th><?= $this->Paginator->sort('Modificado') ?></th>
+              <!-- <th><?= $this->Paginator->sort('Criado') ?></th>
+              <th><?= $this->Paginator->sort('Modificado') ?></th> -->
               <th><?= $this->Paginator->sort('Descrição') ?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($extratos as $extrato): ?>
           <tr>
-            <td><?= $this->Number->format($extrato->id_extrato) ?></td>
-            <td><?= $this->Number->format($extrato->valor) ?></td>
-            <td><?= h($extrato->tipo) ?></td>
+            <!-- <td><?= $this->Number->format($extrato->id_extrato) ?></td> -->
+            
+            <?php if($extrato->tipo === "ENTRADA"){?>    
+                <td style="color: green;">+<?= $this->Number->format($extrato->valor) ?></td>
+              <?php } else{?>
+                <td style="color: red;">-<?= $this->Number->format($extrato->valor) ?></td>
+           
+                <?php } ?>
             <td><?= $extrato->has('conta') ? $this->Html->link($extrato->conta->nconta, ['controller' => 'Contas', 'action' => 'view', $extrato->conta->id_conta]) : '' ?></td>
-            <td><?= h($extrato->created) ?></td>
-            <td><?= h($extrato->modified) ?></td>
+            <!-- <td><?= h($extrato->created) ?></td>
+            <td><?= h($extrato->modified) ?></td> -->
             <td><?= h($extrato->descricao) ?></td>
           </tr>
           <?php endforeach; ?>

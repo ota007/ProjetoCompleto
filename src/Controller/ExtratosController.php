@@ -20,8 +20,17 @@ class ExtratosController extends AppController
     {
         $this->paginate = [
             'contain' => ['Contas'],
+        
         ];
-        $extratos = $this->paginate($this->Extratos);
+
+        $key = $this->request->getQuery('key');
+        if($key){
+               $query = $this->Extratos->find('all',['conditions' => ['Extratos.tipo' => $key]]);
+        }else{
+            $query = $this->Extratos;
+        }
+
+        $extratos = $this->paginate($query);
 
         $this->set(compact('extratos'));
     }

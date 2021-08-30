@@ -18,10 +18,20 @@ class ContasController extends AppController
      */
     public function index()
     {
+       
         $this->paginate = [
             'contain' => ['Bancos','Extratos'],
         ];
-        $contas = $this->paginate($this->Contas);
+
+        $key = $this->request->getQuery('key');
+       if($key){    
+            $query = $this->Contas->find('all',['conditions'=>['Contas.agencia' => $key]]);
+            // debug(json_encode($query,JSON_PRETTY_PRINT));
+       }else{
+        $query = $this->Contas;
+        // debug(json_encode($query,JSON_PRETTY_PRINT));
+       }
+        $contas = $this->paginate($query);
         $this->set(compact('contas'));
         
     }

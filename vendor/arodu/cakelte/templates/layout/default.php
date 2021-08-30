@@ -97,7 +97,7 @@ a {
 
       <!-- Main content -->
       <div class="content">
-        <div class="container-fluid" style="height: 100vh;">
+        <div class="container-fluid" style="min-height: 100vh;">
           <?= $this->Flash->render() ?>
           <?= $this->fetch('content') ?>
         </div><!-- /.container-fluid -->

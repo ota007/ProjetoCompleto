@@ -50,10 +50,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </ul>
 
           <!-- SEARCH FORM -->
-          <?php echo $this->element('header/search') ?>
+          <?php echo $this->element('header/search')?>
 
         </div>
-
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
           <!-- Messages Dropdown Menu -->
@@ -63,7 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <?php echo $this->element('header/notifications') ?>
 
           <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i class="fas fa-th-large"></i></a>
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i class="fas fa-th-large"></i>  </a>
           </li>
 
         </ul>
